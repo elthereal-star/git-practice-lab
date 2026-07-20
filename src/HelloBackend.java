@@ -1,7 +1,7 @@
 public class HelloBackend {
 
     public static String greeting() {
-        return "Hello, Backend!";
+        return "Hi there, greetings from feature/greeting-style!";
     }
 
     public static void main(String[] args) {
