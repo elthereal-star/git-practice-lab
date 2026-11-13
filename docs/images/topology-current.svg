@@ -6,11 +6,11 @@
   </defs>
   <rect width="1150" height="640" fill="#ffffff"/>
 
-  <text x="40" y="42" font-size="21" font-weight="700" fill="#111827">git-practice-lab 现状：走过的路，和还没动的五个分支</text>
+  <text x="40" y="42" font-size="21" font-weight="700" fill="#111827">仓库当前拓扑：已合并的部分，与待练习的五个分支</text>
   <text x="40" y="66" font-size="12.5" fill="#6b7280">左图横向位置不代表真实时间间隔，只表示拓扑关系；右侧五个分支是预置好的练习素材。</text>
 
   <!-- ============ 左：已完成 ============ -->
-  <text x="40" y="108" font-size="12.5" font-weight="700" fill="#059669">① 已经走过</text>
+  <text x="40" y="108" font-size="12.5" font-weight="700" fill="#059669">① 已合并的</text>
 
   <!-- main -->
   <line x1="70" y1="500" x2="600" y2="500" stroke="#1f2937" stroke-width="4"/>
@@ -22,21 +22,21 @@
   <text x="111" y="532" font-size="10.5" fill="#6b7280">生产分支 · 已含 PR #1 合入的 develop 快照</text>
 
   <!-- develop -->
-  <path d="M 70,500 C 100,500 125,380 150,380" fill="none" stroke="#2563eb" stroke-width="3"/>
-  <line x1="150" y1="380" x2="590" y2="380" stroke="#2563eb" stroke-width="3"/>
+  <path d="M 108,500 C 120,500 132,380 150,380" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <line x1="150" y1="380" x2="650" y2="380" stroke="#2563eb" stroke-width="3"/>
   <circle cx="150" cy="380" r="6" fill="#2563eb"/>
   <circle cx="330" cy="380" r="6" fill="#2563eb"/>
-  <circle cx="570" cy="380" r="6" fill="#2563eb"/>
+  <circle cx="600" cy="380" r="6" fill="#2563eb"/>
   <text x="142" y="358" font-size="10.5" fill="#6b7280" text-anchor="end">9e8e789</text>
   <text x="330" y="362" font-size="10.5" fill="#6b7280" text-anchor="middle">140b06d</text>
-  <text x="570" y="404" font-size="10.5" fill="#6b7280" text-anchor="middle">56f4ce9</text>
+  <text x="600" y="406" font-size="10.5" fill="#6b7280" text-anchor="middle">56f4ce9</text>
   <text x="150" y="412" font-size="12.5" font-weight="700" fill="#2563eb">develop</text>
   <text x="212" y="412" font-size="10.5" fill="#6b7280">日常开发的汇合点</text>
 
   <!-- greeting 分支 -->
   <path d="M 150,380 Q 200,232 260,232" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5 4"/>
   <line x1="260" y1="232" x2="360" y2="232" stroke="#059669" stroke-width="3"/>
-  <path d="M 360,232 Q 480,232 566,376" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#t2-green)"/>
+  <path d="M 360,232 Q 490,232 596,376" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#t2-green)"/>
   <circle cx="150" cy="380" r="5.5" fill="#ffffff" stroke="#059669" stroke-width="2.5"/>
   <circle cx="260" cy="232" r="6" fill="#059669"/>
   <circle cx="360" cy="232" r="6" fill="#059669"/>
@@ -57,12 +57,12 @@
 
   <!-- 左侧小结 -->
   <rect x="40" y="556" width="600" height="74" rx="8" fill="#f9fafb" stroke="#e5e7eb"/>
-  <text x="56" y="578" font-size="11" font-weight="700" fill="#374151">这一段你练完的是：</text>
+  <text x="56" y="578" font-size="11" font-weight="700" fill="#374151">这一部分对应的操作链：</text>
   <text x="56" y="598" font-size="10.5" fill="#4b5563">切分支 → 提交 → push → 合回 develop → 解冲突 → 再 push（日常 90% 的工作）</text>
-  <text x="56" y="618" font-size="10.5" fill="#4b5563">另外还开过 PR #1，把 develop 整体合进了 main</text>
+  <text x="56" y="618" font-size="10.5" fill="#4b5563">develop 也曾通过 PR #1 整体合入 main</text>
 
   <!-- ============ 右：待练 ============ -->
-  <text x="700" y="108" font-size="12.5" font-weight="700" fill="#b45309">② 还没动（都从 140b06d 切出，hotfix 除外）</text>
+  <text x="700" y="108" font-size="12.5" font-weight="700" fill="#b45309">② 待练习（都从 140b06d 切出，hotfix 除外）</text>
 
   <!-- 卡片 1 -->
   <rect x="700" y="126" width="412" height="78" rx="9" fill="#ffffff" stroke="#e5e7eb"/>

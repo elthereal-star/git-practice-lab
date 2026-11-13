@@ -1,7 +1,7 @@
 # Git 分支协作练习手册
 
 > 配套仓库：`git-practice-lab`
-> 本地路径：`D:\ai\git练习`　远端：https://github.com/elthereal-star/git-practice-lab
+> 仓库地址：https://github.com/elthereal-star/git-practice-lab　（clone 到哪个目录由你决定）
 > 手册版本：2026-11-13　预计耗时：2～3 小时（可拆成三次）
 
 这个仓库不是用来写代码的，是用来**把 Git 的分支规则练成本能**的。里面的每个分支都模拟了真实后端团队会遇到的场景：日常功能、普通 bug、线上紧急修复、发版准备，以及一次故意制造的冲突。
@@ -16,7 +16,7 @@
 
 | 项目 | 值 |
 | --- | --- |
-| 本地路径 | `D:\ai\git练习` |
+| 本地目录 | 你自己 clone 的位置，下文统称 `git-practice-lab` |
 | 远端地址 | `https://github.com/elthereal-star/git-practice-lab.git` |
 | 默认分支 | `main` |
 | 当前所在分支 | `develop` |
@@ -27,7 +27,7 @@
 每次动手前先跑这三条，确认状态干净、和远端对齐：
 
 ```bash
-cd "D:/ai/git练习"
+cd git-practice-lab
 git status
 git branch -a
 git log --oneline --graph --all --decorate -15
@@ -37,7 +37,7 @@ git log --oneline --graph --all --decorate -15
 
 ### 0.3 用 IDEA 打开
 
-`File → Open → 选 D:\ai\git练习`。右下角会显示当前分支，点击可以直接切分支，比敲命令直观。**但练习时建议先敲命令，再用 IDEA 核对结果** —— 面试不会考 IDEA 按钮在哪。
+`File → Open → 选你 clone 下来的 git-practice-lab 目录`。右下角会显示当前分支，点击可以直接切分支，比敲命令直观。**但练习时建议先敲命令，再用 IDEA 核对结果** —— 面试不会考 IDEA 按钮在哪。
 
 ---
 
@@ -45,9 +45,9 @@ git log --oneline --graph --all --decorate -15
 
 ![仓库现状](images/topology-current.png)
 
-左边是你已经走过的路：从 `main` 切出 `develop`，在 `develop` 上提交了两次，然后 `feature/greeting-style` 改了同一行代码造成冲突，你把它解开合回了 `develop`（合并提交 `56f4ce9`）。之后还开过 **PR #1**，把 `develop` 整体合进了 `main`（`364bc50`）。另外推了一个 `feature/my-first-feature` 上去，内容只是加了一行注释，**没合并**。
+左边是仓库里已经合并掉的部分：`develop` 从 `main` 切出后提交了两次；`feature/greeting-style` 与它改到同一行、产生冲突，随后被解决并合入（合并提交 `56f4ce9`）；之后 `develop` 又整体通过 PR #1 合进了 `main`（`364bc50`）。`feature/my-first-feature` 只加了一行注释，**尚未合并**。
 
-⚠️ 有一个坑必须先说清楚：**远端 `main` 已经是 `364bc50`，但如果你从没在本地拉过，本地 `main` 还会停在最初的 `a7553ac`。** 练习 5 和 6 都要在 `main` 上操作，动手前务必先同步：
+⚠️ 开始前先确认 `main` 停在 `364bc50`。练习 5 和 6 都要在 `main` 上操作，起点错了后面全乱：
 
 ```bash
 git checkout main
@@ -55,7 +55,7 @@ git pull
 git log --oneline -3        # 应该看到 364bc50 Merge pull request #1
 ```
 
-如果你的本地 `main` 没有这条记录，就说明拉取失败（多半是代理问题，见练习 2 末尾的绕过方法）。
+如果只看到 `a7553ac chore: initial commit`，说明你的副本太旧，先 `git pull`；拉取失败多半是代理问题，见练习 2 末尾的绕过方法。
 
 右边是六个预置分支里还没动的五个。注意它们的切出点：
 
@@ -102,9 +102,9 @@ git log --oneline -3        # 应该看到 364bc50 Merge pull request #1
 
 八个练习按依赖顺序排，前四个是主干，后两个是重点，最后两个是进阶。每个练习都是「目标 → 命令 → 验收」，命令可以直接复制。
 
-### 练习 1　feature 闭环（已完成，当复习看）
+### 练习 1　feature 闭环
 
-你之前做过，这里只回顾一遍完整的六步，后面所有练习都是它的变体：
+这是所有后续练习的基础，先完整走一遍这六步：
 
 ```bash
 git checkout develop
@@ -129,7 +129,7 @@ git branch -d feature/xxx           # 6. 删掉本地分支
 **目标**：走一次完整的 Pull Request 流程，理解"代码评审"发生在哪一步。
 
 ```bash
-cd "D:/ai/git练习"
+cd git-practice-lab
 git fetch origin
 git checkout -b feature/order-export origin/feature/order-export
 git log --oneline -1
@@ -157,7 +157,7 @@ git log --oneline -3   # 应该有一条 "Merge pull request #N"
 
 **这里要体会的是**：`Merge pull request` 默认生成的是一个 **merge commit**（两个父提交），不是把提交重新排一遍。所以历史里能清楚看到"这个功能是通过哪个 PR、什么时候合进来的"。
 
-> 如果 `git push` 卡住或报 `Failed to connect`，是你机器上的代理配置残留（`http.proxy` 指向了一个没启动的端口）。临时绕过：
+> 如果 `git push` 卡住或报 `Failed to connect`，通常是本地配了代理、但代理并没在运行（`http.proxy` 指向一个没人监听的端口）。临时绕过：
 > ```bash
 > git -c http.proxy= -c https.proxy= push origin develop
 > ```
@@ -200,12 +200,12 @@ public static int toOffset(int page, int size) {
 
 **目标**：亲手制造一次冲突，然后解开。
 
-⚠️ 注意：**这个冲突你之前已经解决过一次了**（`develop` 上的 `56f4ce9` 就是那次的产物）。所以要先把这个练习"重开一局"。
+⚠️ 注意：**仓库的 `develop` 上，这个冲突已经被解决并合入了**（提交 `56f4ce9`）。直接合并不会再报冲突，所以要先把这个练习"重开一局"。
 
 #### 4.1 重置到冲突发生前
 
 ```bash
-cd "D:/ai/git练习"
+cd git-practice-lab
 git status                          # 必须是 clean
 git checkout develop
 git reset --hard 140b06d            # 回到"greeting 已改、还没合并"的状态
@@ -260,7 +260,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 | 留 B（incoming 那侧） | 你的改动被对方的新方案取代了 |
 | 两个都不要，重写一行 | 双方改的都不完整，需要合并语义 |
 
-你上次的解法是第三种 —— 两边的文案都没留，改回了最朴素的 `"Hello, Backend!"`。这说明**合并结果可以由你决定，Git 只负责把选项摆出来**。
+上面的示例用的是第三种 —— 两边的文案都没留，改成了一行新的 `"Hello, Backend!"`。这说明**合并结果可以由你决定，Git 只负责把选项摆出来**。
 
 改完是这样：
 
@@ -507,7 +507,7 @@ rm tmp.txt                     # 删掉临时文件
 | `fatal: The current branch has no upstream branch` | 新分支没关联远端 | `git push -u origin 分支名` |
 | 合并后发现自己解错了 | 还没提交 | `git merge --abort` |
 | 合并提交已经生成但想反悔 | 已提交 | `git reset --hard ORIG_HEAD` |
-| `Failed to connect to 127.0.0.1 port 65532` | 代理配置指向了没启动的端口 | `git -c http.proxy= -c https.proxy= push` |
+| `Failed to connect to 127.0.0.1 port xxxxx` | 本地配了代理但代理没运行 | `env -u http_proxy -u https_proxy git -c http.proxy= -c https.proxy= push` |
 
 ---
 
