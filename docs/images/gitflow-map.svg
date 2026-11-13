@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 672" width="1150" height="672" font-family="'Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669"/>
+    </marker>
+    <marker id="a-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706"/>
+    </marker>
+    <marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="1150" height="700" fill="#ffffff"/>
+
+  <text x="40" y="44" font-size="21" font-weight="700" fill="#111827">Git Flow 简版：六类分支从哪来、回哪去</text>
+  <text x="40" y="70" font-size="12.5" fill="#6b7280">颜色区分分支类型；虚线是创建方向，实线箭头是合并方向。所有分支都不允许直接改 main。</text>
+
+  <!-- 图例 -->
+  <rect x="790" y="88" width="330" height="122" rx="9" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="806" y="110" font-size="11.5" font-weight="700" fill="#111827">怎么读这张图</text>
+  <line x1="806" y1="126" x2="846" y2="126" stroke="#059669" stroke-width="3" marker-end="url(#a-green)"/>
+  <text x="856" y="130" font-size="10.5" fill="#374151">合并去向（代码流过去）</text>
+  <line x1="806" y1="148" x2="846" y2="148" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="856" y="152" font-size="10.5" fill="#374151">切出方向（新分支从哪来）</text>
+  <text x="806" y="178" font-size="10.5" font-weight="600" fill="#b45309">橙色和红色路径都要合两次</text>
+  <text x="806" y="196" font-size="10" fill="#6b7280">先回 main 发布，再回流 develop 保持同步</text>
+
+  <!-- main -->
+  <line x1="80" y1="520" x2="1010" y2="520" stroke="#1f2937" stroke-width="4"/>
+  <circle cx="80" cy="520" r="6" fill="#1f2937"/>
+  <text x="80" y="552" font-size="13" font-weight="700" fill="#1f2937">main</text>
+  <text x="124" y="552" font-size="11" fill="#6b7280">生产分支 · 永远保持可发布</text>
+
+  <!-- develop -->
+  <path d="M 80,520 C 110,520 135,390 165,390" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <line x1="165" y1="390" x2="1030" y2="390" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="165" cy="390" r="6" fill="#2563eb"/>
+  <circle cx="330" cy="390" r="6" fill="#2563eb"/>
+  <circle cx="570" cy="390" r="6" fill="#2563eb"/>
+  <text x="165" y="420" font-size="13" font-weight="700" fill="#2563eb">develop</text>
+  <text x="228" y="420" font-size="11" fill="#6b7280">集成分支 · 日常功能的汇合点</text>
+
+  <!-- feature -->
+  <path d="M 310,390 Q 340,210 400,210" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5 4"/>
+  <line x1="400" y1="210" x2="500" y2="210" stroke="#059669" stroke-width="3"/>
+  <path d="M 500,210 Q 590,210 660,386" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#a-green)"/>
+  <circle cx="310" cy="390" r="5.5" fill="#ffffff" stroke="#059669" stroke-width="2.5"/>
+  <circle cx="400" cy="210" r="6" fill="#059669"/>
+  <circle cx="500" cy="210" r="6" fill="#059669"/>
+  <text x="392" y="190" font-size="13" font-weight="700" fill="#059669">feature/*　bugfix/*</text>
+  <text x="392" y="234" font-size="10.5" fill="#6b7280">从 develop 切出，改完合回来</text>
+  <text x="672" y="372" font-size="10.5" font-weight="600" fill="#059669">合回 develop</text>
+
+  <!-- release -->
+  <path d="M 745,390 Q 775,300 805,300" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5 4"/>
+  <line x1="805" y1="300" x2="880" y2="300" stroke="#d97706" stroke-width="3"/>
+  <path d="M 880,300 Q 915,300 915,514" fill="none" stroke="#d97706" stroke-width="3" marker-end="url(#a-orange)"/>
+  <path d="M 880,300 Q 968,316 1006,384" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a-orange)"/>
+  <circle cx="745" cy="390" r="5.5" fill="#ffffff" stroke="#d97706" stroke-width="2.5"/>
+  <circle cx="805" cy="300" r="6" fill="#d97706"/>
+  <circle cx="880" cy="300" r="6" fill="#d97706"/>
+  <text x="795" y="282" font-size="13" font-weight="700" fill="#d97706">release/*</text>
+  <text x="925" y="470" font-size="10.5" font-weight="600" fill="#b45309">先回 main</text>
+  <text x="1012" y="368" font-size="10.5" font-weight="600" fill="#b45309">再回流</text>
+
+  <!-- hotfix -->
+  <path d="M 400,520 Q 430,610 480,610" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5 4"/>
+  <line x1="480" y1="610" x2="570" y2="610" stroke="#dc2626" stroke-width="3"/>
+  <path d="M 570,610 Q 640,610 660,522" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#a-red)"/>
+  <path d="M 570,610 Q 750,628 838,502 Q 888,442 903,394" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a-red)"/>
+  <circle cx="400" cy="520" r="5.5" fill="#ffffff" stroke="#dc2626" stroke-width="2.5"/>
+  <circle cx="480" cy="610" r="6" fill="#dc2626"/>
+  <circle cx="570" cy="610" r="6" fill="#dc2626"/>
+  <text x="468" y="644" font-size="13" font-weight="700" fill="#dc2626">hotfix/*</text>
+  <text x="532" y="644" font-size="10.5" fill="#6b7280">线上紧急问题，从 main 切出</text>
+  <text x="662" y="582" font-size="10.5" font-weight="600" fill="#dc2626">先回 main</text>
+  <text x="762" y="612" font-size="10.5" font-weight="600" fill="#dc2626">再回流 develop（最常漏）</text>
+</svg>

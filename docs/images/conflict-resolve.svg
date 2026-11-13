@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 690" width="1180" height="690" font-family="'Microsoft YaHei','PingFang SC','Noto Sans SC',sans-serif">
+  <defs>
+    <marker id="c-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1180" height="690" fill="#ffffff"/>
+
+  <text x="40" y="40" font-size="21" font-weight="700" fill="#111827">冲突是怎么产生的，又该怎么收场</text>
+  <text x="40" y="65" font-size="12.5" fill="#6b7280">仓库里真实发生过的那一次：develop 和 feature/greeting-style 都改了 HelloBackend.java 的第 5 行。</text>
+
+  <!-- Step 1 双方 -->
+  <rect x="40" y="92" width="500" height="96" rx="9" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="58" y="114" font-size="12" font-weight="700" fill="#1d4ed8">develop（你的分支） · 140b06d</text>
+  <text x="58" y="136" font-size="11" fill="#374151">改了 greeting 的文案，加了一句 polish：</text>
+  <text x="58" y="158" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#7c2d12">"Hello, Backend World! (polished on develop)"</text>
+  <text x="58" y="176" font-size="10" fill="#6b7280">← 这叫「本地/当前分支」一侧，冲突里标记为 HEAD</text>
+
+  <rect x="640" y="92" width="500" height="96" rx="9" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="658" y="114" font-size="12" font-weight="700" fill="#15803d">feature/greeting-style · f38232d</text>
+  <text x="658" y="136" font-size="11" fill="#374151">也在改同一行，还换了主语：</text>
+  <text x="658" y="158" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#7c2d12">"Hi there, greetings from feature/greeting-style!"</text>
+  <text x="658" y="176" font-size="10" fill="#6b7280">← 这叫「被合并进来」一侧，标记为 origin/feature/...</text>
+
+  <!-- 汇合箭头 -->
+  <path d="M 290,188 Q 290,214 400,224 Q 540,236 560,250" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#c-arrow)"/>
+  <path d="M 890,188 Q 890,214 780,224 Q 640,236 620,250" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#c-arrow)"/>
+  <text x="500" y="212" font-size="11" font-weight="600" fill="#374151">同一行被两边改成不同内容 → Git 无法替你判断</text>
+
+  <!-- Step 2 冲突提示 -->
+  <rect x="330" y="252" width="520" height="60" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="348" y="274" font-size="11.5" font-weight="700" fill="#b91c1c">$ git merge origin/feature/greeting-style</text>
+  <text x="348" y="293" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#991b1b">CONFLICT (content): Merge conflict in src/HelloBackend.java</text>
+  <text x="348" y="306" font-size="10" fill="#991b1b">Automatic merge failed; fix conflicts and then commit the result.</text>
+
+  <!-- Step 3 左：冲突标记 -->
+  <text x="40" y="352" font-size="12.5" font-weight="700" fill="#b91c1c">仓库里的文件变成了这样</text>
+  <rect x="40" y="364" width="560" height="196" rx="8" fill="#1f2937"/>
+  <text x="58" y="390" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#9ca3af">  public static String greeting() {</text>
+  <text x="58" y="412" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#f87171" font-weight="700">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</text>
+  <text x="58" y="432" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#e5e7eb">    return "Hello, Backend World! (polished on develop)";</text>
+  <text x="58" y="452" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#fbbf24" font-weight="700">=======</text>
+  <text x="58" y="472" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#e5e7eb">    return "Hi there, greetings from feature/greeting-style!";</text>
+  <text x="58" y="492" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#f87171" font-weight="700">&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/feature/greeting-style</text>
+  <text x="58" y="512" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#9ca3af">  }</text>
+  <text x="58" y="540" font-size="10" fill="#9ca3af">三个标记必须全部删掉，一个都不能留</text>
+
+  <!-- Step 3 右：解决 -->
+  <text x="628" y="352" font-size="12.5" font-weight="700" fill="#15803d">你手动改成最终想要的样子</text>
+  <rect x="628" y="364" width="512" height="196" rx="8" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="646" y="390" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#6b7280">  public static String greeting() {</text>
+  <text x="646" y="414" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#15803d">    return "Hello, Backend!";</text>
+  <text x="646" y="434" font-size="10" fill="#9ca3af">    ↑ 当时的解决结果（既不是 A 也不是 B）</text>
+  <text x="646" y="458" font-size="10.5" font-family="Consolas,Menlo,monospace" fill="#6b7280">  }</text>
+  <rect x="640" y="476" width="488" height="70" rx="6" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="654" y="496" font-size="10.5" font-weight="700" fill="#92400e">重点：合并结果可以由你决定</text>
+  <text x="654" y="514" font-size="10" fill="#92400e">可以选 A、选 B、两者拼接，也可以重写一行新的。</text>
+  <text x="654" y="532" font-size="10" fill="#92400e">Git 只负责把两边都摆出来，判断权在你手里。</text>
+
+  <!-- Step 4 收尾 -->
+  <text x="40" y="592" font-size="12.5" font-weight="700" fill="#111827">收尾三步</text>
+  <rect x="40" y="604" width="330" height="52" rx="7" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="56" y="624" font-size="11" font-family="Consolas,Menlo,monospace" fill="#1d4ed8">git add src/HelloBackend.java</text>
+  <text x="56" y="643" font-size="10" fill="#6b7280">告诉 Git「这个文件的冲突我处理完了」</text>
+
+  <rect x="386" y="604" width="330" height="52" rx="7" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="402" y="624" font-size="11" font-family="Consolas,Menlo,monospace" fill="#1d4ed8">git commit -m "merge: ..."</text>
+  <text x="402" y="643" font-size="10" fill="#6b7280">生成 merge commit，两个父提交</text>
+
+  <rect x="732" y="604" width="408" height="52" rx="7" fill="#fef2f2" stroke="#fca5a5"/>
+  <text x="748" y="624" font-size="11" font-family="Consolas,Menlo,monospace" fill="#b91c1c">git merge --abort</text>
+  <text x="748" y="643" font-size="10" fill="#991b1b">后悔药：回到 merge 之前，一条命令全撤回</text>
+</svg>

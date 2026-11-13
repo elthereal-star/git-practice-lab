@@ -1,0 +1,15 @@
+# 默认让 Git 自动判断文本文件
+* text=auto
+
+# 补丁脚本必须是 LF，否则在 Git Bash 里执行会报 "command not found"
+*.sh    text eol=lf
+
+# 文档与矢量图统一 LF，仓库是 Linux/Windows 混用环境
+*.md    text eol=lf
+*.svg   text eol=lf
+
+# Java 源码保持 LF
+*.java  text eol=lf
+
+# 自身也保持 LF
+.gitattributes text eol=lf
