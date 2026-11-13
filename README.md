@@ -41,7 +41,7 @@ git log --oneline --graph --all --decorate -15
 
 ![仓库现状](docs/images/topology-current.png)
 
-`main` 目前停在 `364bc50` —— 那是 PR #1 把 `develop` 整体合进来的那次合并。如果你的副本里 `main` 显示 `a7553ac`（initial commit），先 `git checkout main && git pull`。
+`main` 的历史里有 PR #1 那次合并（`364bc50`，把 `develop` 整体合了进来），当前 `main` 与 `develop` 内容一致。如果你的副本里 `main` 显示 `a7553ac`（initial commit），先 `git checkout main && git pull`。
 
 | 分支 | 改动 | 练习 | 状态 |
 | --- | --- | --- | --- |

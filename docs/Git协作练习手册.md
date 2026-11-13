@@ -47,12 +47,12 @@ git log --oneline --graph --all --decorate -15
 
 左边是仓库里已经合并掉的部分：`develop` 从 `main` 切出后提交了两次；`feature/greeting-style` 与它改到同一行、产生冲突，随后被解决并合入（合并提交 `56f4ce9`）；之后 `develop` 又整体通过 PR #1 合进了 `main`（`364bc50`）。`feature/my-first-feature` 只加了一行注释，**尚未合并**。
 
-⚠️ 开始前先确认 `main` 停在 `364bc50`。练习 5 和 6 都要在 `main` 上操作，起点错了后面全乱：
+⚠️ 开始前先确认 `main` 是最新的。练习 5 和 6 都要在 `main` 上操作，起点错了后面全乱：
 
 ```bash
 git checkout main
 git pull
-git log --oneline -3        # 应该看到 364bc50 Merge pull request #1
+git log --oneline -5        # 应该能看到 364bc50 Merge pull request #1
 ```
 
 如果只看到 `a7553ac chore: initial commit`，说明你的副本太旧，先 `git pull`；拉取失败多半是代理问题，见练习 2 末尾的绕过方法。
@@ -294,12 +294,12 @@ git log --oneline --graph -4
 
 #### 5.1 建本地分支
 
-动手前先确认 `main` 是最新的（必须在 `364bc50`，不能停在 `a7553ac`）：
+动手前先确认 `main` 是最新的（不能停在 `a7553ac` 那个 initial commit）：
 
 ```bash
 git checkout main
 git pull
-git log --oneline -1          # 必须是 364bc50 Merge pull request #1
+git log --oneline -5          # 应该能看到 364bc50 Merge pull request #1
 git fetch origin
 git checkout -b hotfix/fix-null-pointer origin/hotfix/fix-null-pointer
 cat src/common/SafeParser.java
@@ -377,7 +377,7 @@ git log --oneline -1 -- src/common/SafeParser.java
 **目标**：走完一次从"准备发版"到"打完 tag"的完整流程。
 
 ```bash
-git checkout main && git pull     # 先确保 main 在 364bc50
+git checkout main && git pull     # 先确保 main 是最新的
 git fetch origin
 git checkout -b release/v1.0.0 origin/release/v1.0.0
 cat VERSION                       # 内容是 1.0.0
