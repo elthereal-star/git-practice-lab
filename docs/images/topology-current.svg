@@ -13,11 +13,13 @@
   <text x="40" y="108" font-size="12.5" font-weight="700" fill="#059669">① 已经走过</text>
 
   <!-- main -->
-  <line x1="70" y1="500" x2="420" y2="500" stroke="#1f2937" stroke-width="4"/>
+  <line x1="70" y1="500" x2="600" y2="500" stroke="#1f2937" stroke-width="4"/>
   <circle cx="70" cy="500" r="6" fill="#1f2937"/>
+  <circle cx="470" cy="500" r="6" fill="#1f2937"/>
   <text x="70" y="486" font-size="10.5" fill="#6b7280" text-anchor="middle">a7553ac</text>
+  <text x="470" y="486" font-size="10.5" fill="#6b7280" text-anchor="middle">364bc50</text>
   <text x="70" y="532" font-size="12.5" font-weight="700" fill="#1f2937">main</text>
-  <text x="111" y="532" font-size="10.5" fill="#6b7280">只有 initial commit，从没发过版</text>
+  <text x="111" y="532" font-size="10.5" fill="#6b7280">生产分支 · 已含 PR #1 合入的 develop 快照</text>
 
   <!-- develop -->
   <path d="M 70,500 C 100,500 125,380 150,380" fill="none" stroke="#2563eb" stroke-width="3"/>
@@ -54,9 +56,10 @@
   <text x="516" y="459" font-size="10.5" fill="#94a3b8">未合并</text>
 
   <!-- 左侧小结 -->
-  <rect x="40" y="556" width="600" height="58" rx="8" fill="#f9fafb" stroke="#e5e7eb"/>
+  <rect x="40" y="556" width="600" height="74" rx="8" fill="#f9fafb" stroke="#e5e7eb"/>
   <text x="56" y="578" font-size="11" font-weight="700" fill="#374151">这一段你练完的是：</text>
-  <text x="56" y="598" font-size="10.5" fill="#4b5563">切 feature 分支 → 提交 → push → 合回 develop → 解冲突 → 再 push。日常 90% 的工作就是这套。</text>
+  <text x="56" y="598" font-size="10.5" fill="#4b5563">切分支 → 提交 → push → 合回 develop → 解冲突 → 再 push（日常 90% 的工作）</text>
+  <text x="56" y="618" font-size="10.5" fill="#4b5563">另外还开过 PR #1，把 develop 整体合进了 main</text>
 
   <!-- ============ 右：待练 ============ -->
   <text x="700" y="108" font-size="12.5" font-weight="700" fill="#b45309">② 还没动（都从 140b06d 切出，hotfix 除外）</text>

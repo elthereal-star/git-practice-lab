@@ -45,7 +45,17 @@ git log --oneline --graph --all --decorate -15
 
 ![仓库现状](images/topology-current.svg)
 
-左边是你已经走过的路：从 `main` 切出 `develop`，在 `develop` 上提交了两次，然后 `feature/greeting-style` 改了同一行代码造成冲突，你把它解开合回了 `develop`（合并提交 `56f4ce9`）。另外还推了一个 `feature/my-first-feature` 上去，内容只是加了一行注释，**没合并**。
+左边是你已经走过的路：从 `main` 切出 `develop`，在 `develop` 上提交了两次，然后 `feature/greeting-style` 改了同一行代码造成冲突，你把它解开合回了 `develop`（合并提交 `56f4ce9`）。之后还开过 **PR #1**，把 `develop` 整体合进了 `main`（`364bc50`）。另外推了一个 `feature/my-first-feature` 上去，内容只是加了一行注释，**没合并**。
+
+⚠️ 有一个坑必须先说清楚：**远端 `main` 已经是 `364bc50`，但如果你从没在本地拉过，本地 `main` 还会停在最初的 `a7553ac`。** 练习 5 和 6 都要在 `main` 上操作，动手前务必先同步：
+
+```bash
+git checkout main
+git pull
+git log --oneline -3        # 应该看到 364bc50 Merge pull request #1
+```
+
+如果你的本地 `main` 没有这条记录，就说明拉取失败（多半是代理问题，见练习 2 末尾的绕过方法）。
 
 右边是六个预置分支里还没动的五个。注意它们的切出点：
 
@@ -284,7 +294,12 @@ git log --oneline --graph -4
 
 #### 5.1 建本地分支
 
+动手前先确认 `main` 是最新的（必须在 `364bc50`，不能停在 `a7553ac`）：
+
 ```bash
+git checkout main
+git pull
+git log --oneline -1          # 必须是 364bc50 Merge pull request #1
 git fetch origin
 git checkout -b hotfix/fix-null-pointer origin/hotfix/fix-null-pointer
 cat src/common/SafeParser.java
@@ -362,6 +377,7 @@ git log --oneline -1 -- src/common/SafeParser.java
 **目标**：走完一次从"准备发版"到"打完 tag"的完整流程。
 
 ```bash
+git checkout main && git pull     # 先确保 main 在 364bc50
 git fetch origin
 git checkout -b release/v1.0.0 origin/release/v1.0.0
 cat VERSION                       # 内容是 1.0.0

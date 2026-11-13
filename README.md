@@ -39,6 +39,8 @@ git log --oneline --graph --all --decorate -15
 
 ## 预置分支与进度
 
+`main` 目前停在 `364bc50` —— 那是 PR #1 把 `develop` 整体合进来的那次合并。如果你本地 `main` 还显示 `a7553ac`（initial commit），说明从没拉过，练习 5、6 之前务必先 `git checkout main && git pull`。
+
 | 分支 | 改动 | 练习 | 状态 |
 | --- | --- | --- | --- |
 | `feature/greeting-style` | 改 greeting 文案，与 develop 冲突 | 练习 4 | ✅ 已合并（含冲突解决） |
