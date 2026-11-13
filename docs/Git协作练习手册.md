@@ -43,7 +43,7 @@ git log --oneline --graph --all --decorate -15
 
 ## 1. 先看懂这个仓库现在的样子
 
-![仓库现状](images/topology-current.svg)
+![仓库现状](images/topology-current.png)
 
 左边是你已经走过的路：从 `main` 切出 `develop`，在 `develop` 上提交了两次，然后 `feature/greeting-style` 改了同一行代码造成冲突，你把它解开合回了 `develop`（合并提交 `56f4ce9`）。之后还开过 **PR #1**，把 `develop` 整体合进了 `main`（`364bc50`）。另外推了一个 `feature/my-first-feature` 上去，内容只是加了一行注释，**没合并**。
 
@@ -73,7 +73,7 @@ git log --oneline -3        # 应该看到 364bc50 Merge pull request #1
 
 ## 2. 规则：六类分支从哪来、回哪去
 
-![Git Flow 规则](images/gitflow-map.svg)
+![Git Flow 规则](images/gitflow-map.png)
 
 看这张图只需要抓三个点：
 
@@ -242,7 +242,7 @@ Automatic merge failed; fix conflicts and then commit the result.
     }
 ```
 
-![冲突的产生与解决](images/conflict-resolve.svg)
+![冲突的产生与解决](images/conflict-resolve.png)
 
 读懂这三个标记是关键：
 
@@ -290,7 +290,7 @@ git log --oneline --graph -4
 
 **目标**：搞懂为什么 hotfix 要合两次，以及漏掉第二次会发生什么。
 
-![hotfix 双回流](images/hotfix-double-merge.svg)
+![hotfix 双回流](images/hotfix-double-merge.png)
 
 #### 5.1 建本地分支
 
@@ -533,14 +533,20 @@ git-practice-lab/
 ├── README.md                      仓库说明与练习入口
 ├── docs/
 │   ├── Git协作练习手册.md          本文档
-│   └── images/
-│       ├── gitflow-map.svg        图 1　Git Flow 规则
-│       ├── topology-current.svg   图 2　仓库现状
-│       ├── conflict-resolve.svg   图 3　冲突的产生与解决
-│       └── hotfix-double-merge.svg 图 4　hotfix 双回流
+│   └── images/                    每张图都有 svg（源）和 png（渲染产物）
+│       ├── gitflow-map             图 1　Git Flow 规则
+│       ├── topology-current        图 2　仓库现状
+│       ├── conflict-resolve        图 3　冲突的产生与解决
+│       └── hotfix-double-merge     图 4　hotfix 双回流
 ├── scripts/
-│   └── reset-to-conflict.sh       练习 4 的重置脚本
+│   ├── reset-to-conflict.sh       练习 4 的重置脚本
+│   └── render-images.sh           SVG → PNG 批量渲染
 └── src/
 ```
 
-图片是手写 SVG，矢量格式，浏览器、IDEA、GitHub 都能直接显示，改文案直接文本编辑即可。
+### 为什么同一张图有 SVG 和 PNG 两份
+
+- **`.svg` 是唯一的编辑源**。手写矢量，改文案直接用编辑器改文本，改完跑一次 `bash scripts/render-images.sh` 就能重新生成 PNG。
+- **`.png` 是兜底格式**。VSCode 的内置 Markdown 预览出于安全策略不加载本地 SVG，会显示成空白；部分编辑器、聊天软件、PPT 也一样。PNG 在所有地方都能显示。
+
+所以文档正文引用的是 PNG。想改图，改 SVG，然后跑脚本，不要手改 PNG。图没有变化时不必重跑脚本。

@@ -39,6 +39,8 @@ git log --oneline --graph --all --decorate -15
 
 ## 预置分支与进度
 
+![仓库现状](docs/images/topology-current.png)
+
 `main` 目前停在 `364bc50` —— 那是 PR #1 把 `develop` 整体合进来的那次合并。如果你本地 `main` 还显示 `a7553ac`（initial commit），说明从没拉过，练习 5、6 之前务必先 `git checkout main && git pull`。
 
 | 分支 | 改动 | 练习 | 状态 |
@@ -67,9 +69,10 @@ bash scripts/reset-to-conflict.sh
 ├── README.md
 ├── docs/
 │   ├── Git协作练习手册.md          完整练习手册
-│   └── images/                     四张分支示意图（SVG）
+│   └── images/                     四张示意图（.svg 源文件 + .png 渲染产物）
 ├── scripts/
-│   └── reset-to-conflict.sh        练习 4 的重置脚本
+│   ├── reset-to-conflict.sh        练习 4 的重置脚本
+│   └── render-images.sh            SVG → PNG 批量渲染
 └── src/
     └── HelloBackend.java
 ```
